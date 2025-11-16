@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
+import axios from 'axios'
 import './App.css'
 
 function App() {
@@ -11,10 +12,8 @@ function App() {
     const fetchInitialData = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
-        const result = await response.json();
-        setData(result);
-        console.log(result)
+        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        setData(response.data);
       } catch(error) {
         setError('Помилка отриманих данних', error);
       } finally {
